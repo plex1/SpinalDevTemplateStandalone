@@ -1,0 +1,9 @@
+## iCE40-hx8k breakout board
+
+set_io CLK  J3
+set_io BUT1 H16
+set_io BUT2 G15
+set_io LED1 B5
+set_io LED2 B4
+
+
