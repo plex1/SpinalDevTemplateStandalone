@@ -24,21 +24,23 @@ import spinal.lib._
 import scala.util.Random
 
 //Hardware definition
-class MyTopLevel extends Component {
+class MyTopLevel(stateWidth: Int = 25) extends Component {
+
   val io = new Bundle {
     val cond0 = in  Bool
     val cond1 = in  Bool
     val flag  = out Bool
-    val state = out UInt(8 bits)
+    val state = out UInt(stateWidth bits)
   }
-  val counter = Reg(UInt(8 bits)) init(0)
+  val counter = Reg(UInt(stateWidth bits)) init(0)
 
   when(io.cond0){
     counter := counter + 1
   }
 
   io.state := counter
-  io.flag  := (counter === 0) | io.cond1
+  io.flag  := (counter(stateWidth-1) === False) | io.cond1
+
 }
 
 //Generate the MyTopLevel's Verilog

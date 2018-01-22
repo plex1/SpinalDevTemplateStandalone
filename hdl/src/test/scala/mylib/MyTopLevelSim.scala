@@ -10,7 +10,7 @@ import scala.util.Random
 //MyTopLevel's testbench
 object MyTopLevelSim {
   def main(args: Array[String]) {
-    SimConfig.withWave.doSim(new MyTopLevel){dut =>
+    SimConfig.withWave.doSim(new MyTopLevel(8)){dut =>
       //Fork a process to generate the reset and the clock on the dut
       dut.clockDomain.forkStimulus(period = 10)
 
@@ -25,7 +25,7 @@ object MyTopLevelSim {
         dut.clockDomain.waitRisingEdge()
 
         //Check that the dut values match with the reference model ones
-        val modelFlag = modelState == 0 || dut.io.cond1.toBoolean
+        val modelFlag = (modelState &  0x80) == 0 || dut.io.cond1.toBoolean
         assert(dut.io.state.toInt == modelState)
         assert(dut.io.flag.toBoolean == modelFlag)
 

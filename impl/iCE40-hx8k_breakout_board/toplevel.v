@@ -14,15 +14,16 @@ module toplevel(
   wire     io_mainClk;
 
   SB_GB mainClkBuffer (
-    .USER_SIGNAL_TO_GLOBAL_BUFFER (io_J3),
-    .GLOBAL_BUFFER_OUTPUT ( io_mainClk)
+    .USER_SIGNAL_TO_GLOBAL_BUFFER (CLK),
+    .GLOBAL_BUFFER_OUTPUT (io_mainClk)
   );
 
   MyTopLevel MyTopLevelInst
   (
    .io_cond0(1'b1),
-   .io_cond1(1'b1),
+   .io_cond1(1'b0),
    .io_flag(LED1),
+   .io_state(),
    .reset(1'b0),
    .clk (io_mainClk),   
   );

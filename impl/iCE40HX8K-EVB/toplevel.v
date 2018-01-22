@@ -12,7 +12,7 @@ module toplevel(
 
   wire io_mainClk;
  
-  // Use PLL to downclock external clock.
+  // Use PLL to downclock external clock. Generate 12MHz
   toplevel_pll toplevel_pll_inst(.REFERENCECLK(CLK),
                                  .PLLOUTCORE(io_mainClk),
                                  .PLLOUTGLOBAL(),
@@ -23,6 +23,7 @@ module toplevel(
    .io_cond0(BUT1),
    .io_cond1(BUT2),
    .io_flag(LED1),
+   .io_state(),
    .reset(1'b0),
    .clk (io_mainClk),   
   );
